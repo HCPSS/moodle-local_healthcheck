@@ -64,8 +64,8 @@ if ($individual_checker->check()) {
 $cronlastrun = (int)get_config('local_healthcheck', 'healthcheck_track_cron');
 if (!$cronlastrun || $cronlastrun < (time() - 3600)) {
     // Cron has not run for over an hour.
-    $subject  = get_site()->fullname . ': possible individual email delay';
-    $message  = "Posts found that should have been sent as individual emails by now.";
+    $subject  = get_site()->fullname . ': cron may have hung';
+    $message  = "Cron has not run for over an hour.";
 
     foreach ($users as $user) {
         email_to_user($user, $from, $subject, $message);
